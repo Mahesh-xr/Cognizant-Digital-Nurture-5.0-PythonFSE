@@ -406,27 +406,223 @@ Kishore received: New Video Uploaded
 * Event Handling Systems
 
 ---
+# Additional Design Patterns
 
-# Summary
+## 7. Strategy Pattern
 
-| Pattern   | Type       | Purpose                         |
-| --------- | ---------- | ------------------------------- |
-| Singleton | Creational | Single instance creation        |
-| Factory   | Creational | Object creation abstraction     |
-| Builder   | Creational | Step-by-step object creation    |
-| Adapter   | Structural | Connect incompatible interfaces |
-| Decorator | Structural | Add behavior dynamically        |
-| Observer  | Behavioral | Notify dependent objects        |
+### Purpose
+
+Defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.
+
+### Example
+
+```java
+interface PaymentStrategy {
+    void pay(int amount);
+}
+
+class CreditCardPayment implements PaymentStrategy {
+    public void pay(int amount) {
+        System.out.println("Paid ₹" + amount + " using Credit Card");
+    }
+}
+
+class UPIPayment implements PaymentStrategy {
+    public void pay(int amount) {
+        System.out.println("Paid ₹" + amount + " using UPI");
+    }
+}
+
+class PaymentContext {
+    private PaymentStrategy strategy;
+
+    public PaymentContext(PaymentStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void executePayment(int amount) {
+        strategy.pay(amount);
+    }
+}
+```
+
+### Usage
+
+```java
+PaymentContext payment =
+        new PaymentContext(new UPIPayment());
+
+payment.executePayment(1000);
+```
+
+### Real-World Examples
+
+* Payment Gateway Selection
+* Sorting Algorithms
+* Route Navigation Systems
 
 ---
 
-# Key Learnings
+## 8. Facade Pattern
 
-* Improved understanding of object-oriented design.
-* Learned how to reduce coupling between classes.
-* Understood code reusability and scalability.
-* Applied industry-standard design patterns.
-* Gained knowledge of real-world software architecture concepts.
+### Purpose
+
+Provides a simplified interface to a complex subsystem.
+
+### Example
+
+```java
+class AudioPlayer {
+    void playAudio() {
+        System.out.println("Playing Audio");
+    }
+}
+
+class VideoPlayer {
+    void playVideo() {
+        System.out.println("Playing Video");
+    }
+}
+
+class MediaFacade {
+
+    private AudioPlayer audio = new AudioPlayer();
+    private VideoPlayer video = new VideoPlayer();
+
+    public void playMedia() {
+        audio.playAudio();
+        video.playVideo();
+    }
+}
+```
+
+### Usage
+
+```java
+MediaFacade media = new MediaFacade();
+media.playMedia();
+```
+
+### Real-World Examples
+
+* Spring Boot Starter
+* Database Utility Classes
+* Multimedia Applications
 
 ---
 
+# Architecture Patterns
+
+## 9. MVC (Model-View-Controller)
+
+### Components
+
+### Model
+
+* Stores data
+* Contains business logic
+
+### View
+
+* Displays data to users
+* User Interface
+
+### Controller
+
+* Handles user requests
+* Updates Model and View
+
+### Flow
+
+```
+User → Controller → Model
+                  ↓
+                View
+```
+
+### Advantages
+
+* Separation of Concerns
+* Easy Maintenance
+* Better Testing
+
+### Example
+
+```
+Student (Model)
+StudentView (View)
+StudentController (Controller)
+```
+
+### Used In
+
+* Spring MVC
+* ASP.NET MVC
+* Django
+
+---
+
+## 10. MVVM (Model-View-ViewModel)
+
+### Components
+
+### Model
+
+* Business Logic
+* Database Operations
+
+### View
+
+* UI Layer
+
+### ViewModel
+
+* Connects View and Model
+* Provides Data Binding
+
+### Flow
+
+```
+View ↔ ViewModel ↔ Model
+```
+
+### Advantages
+
+* Better UI Separation
+* Easier Testing
+* Supports Data Binding
+
+### Used In
+
+* Android Development
+* Jetpack Compose
+* WPF
+* Flutter (similar architecture)
+
+---
+
+# Design Patterns Covered
+
+| Pattern   | Category      |
+| --------- | ------------- |
+| Singleton | Creational    |
+| Factory   | Creational    |
+| Builder   | Creational    |
+| Adapter   | Structural    |
+| Decorator | Structural    |
+| Facade    | Structural    |
+| Observer  | Behavioral    |
+| Strategy  | Behavioral    |
+| MVC       | Architectural |
+| MVVM      | Architectural |
+
+---
+
+## Key Takeaways
+
+* Learned commonly used design patterns.
+* Understood object creation techniques.
+* Learned how to reduce coupling.
+* Improved software maintainability.
+* Gained knowledge of enterprise application architecture.
+* Explored MVC and MVVM design architectures used in modern applications.
