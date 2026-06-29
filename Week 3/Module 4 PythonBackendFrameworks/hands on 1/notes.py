@@ -190,3 +190,18 @@ Django's View performs the role of the Controller,
 while the Template performs the role of the View
 in traditional MVC.
 """
+
+# manage.py
+# Command-line utility used to manage Django project tasks.
+
+# settings.py
+# Contains the global configuration and settings for the Django project.
+
+# urls.py
+# Maps incoming URLs to their corresponding view functions or classes.
+
+# wsgi.py
+# Exposes the WSGI application for deployment using WSGI servers.
+
+# asgi.py
+# Exposes the ASGI application for asynchronous deployment using ASGI servers.
