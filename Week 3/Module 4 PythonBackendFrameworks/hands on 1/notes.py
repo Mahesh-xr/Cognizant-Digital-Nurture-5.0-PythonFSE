@@ -205,3 +205,25 @@ in traditional MVC.
 
 # asgi.py
 # Exposes the ASGI application for asynchronous deployment using ASGI servers.
+
+
+from courses.models import Department
+
+# Retrieve all departments
+Department.objects.all()
+
+# Retrieve one department
+Department.objects.get(id=1)
+
+# Filter departments
+Department.objects.filter(
+    department_name="Computer Science"
+)
+
+# First department
+Department.objects.first()
+
+# Check existence
+Department.objects.filter(
+    department_name="Computer Science"
+).exists()
