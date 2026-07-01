@@ -1,5 +1,6 @@
 from extension import db
 
+
 class Department(db.Model):
     __tablename__ = "department"
 
@@ -12,6 +13,14 @@ class Department(db.Model):
         "Course",
         back_populates="department"
     )
+
+    def to_dict(self):
+        return {
+            "department_id": self.department_id,
+            "name": self.name,
+            "head_of_dept": self.head_of_dept,
+            "budget": self.budget
+        }
 
 
 class Course(db.Model):
@@ -38,6 +47,15 @@ class Course(db.Model):
         back_populates="course"
     )
 
+    def to_dict(self):
+        return {
+            "course_id": self.course_id,
+            "name": self.name,
+            "code": self.code,
+            "credits": self.credits,
+            "department_id": self.department_id
+        }
+
 
 class Student(db.Model):
     __tablename__ = "student"
@@ -58,6 +76,16 @@ class Student(db.Model):
         "Enrollment",
         back_populates="student"
     )
+
+    def to_dict(self):
+        return {
+            "student_id": self.student_id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "enrollment_year": self.enrollment_year,
+            "department_id": self.department_id
+        }
 
 
 class Enrollment(db.Model):
@@ -89,3 +117,12 @@ class Enrollment(db.Model):
         "Course",
         back_populates="enrollments"
     )
+
+    def to_dict(self):
+        return {
+            "enrollment_id": self.enrollment_id,
+            "student_id": self.student_id,
+            "course_id": self.course_id,
+            "enrollment_date": str(self.enrollment_date),
+            "grade": self.grade
+        }

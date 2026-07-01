@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from config import Config
 from courses.routes import courses_bp
 from extension import db, migrate
-
+import courses.models
 
 def create_app():
     app = Flask(__name__)
