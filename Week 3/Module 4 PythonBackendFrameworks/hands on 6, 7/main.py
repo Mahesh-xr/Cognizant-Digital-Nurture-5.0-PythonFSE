@@ -1,6 +1,6 @@
 from typing import Optional
 
-from fastapi import Depends, FastAPI, HTTPException, status, BackgroundTasks
+from fastapi import Depends, FastAPI, HTTPException, status, BackgroundTasks, Response
 from fastapi.concurrency import asynccontextmanager
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -92,10 +92,12 @@ async def get_course(
     response_model=CourseResponse,
     status_code=status.HTTP_201_CREATED,
     tags=["Courses"]
+   
 )
 async def create_course(
     course: CourseCreate,
-    db: AsyncSession = Depends(get_db),
+    response: Response,
+    db: AsyncSession = Depends(get_db)
 ):
     new_course = Course(
         name=course.name,
@@ -110,6 +112,7 @@ async def create_course(
 
     await db.refresh(new_course)
 
+    response.headers["Location"] = f"/api/courses/{new_course.id}/"
     return new_course
 
 
