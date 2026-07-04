@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class CourseCreate(BaseModel):
@@ -68,3 +68,22 @@ class EnrollmentResponse(BaseModel):
     student_id: int
     course_id: int
     grade: str
+
+
+class UserRegister(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class UserResponse(BaseModel):
+    id: int
+    email: EmailStr
+    is_active: int
+
+    class Config:
+        orm_mode = True
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
