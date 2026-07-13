@@ -23,7 +23,7 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
-import { useEnrollmentStore } from "../stores/enrollment";
+import { useEnrollmentStore } from "../stores/enrollments";
 
 const store = useEnrollmentStore();
 </script>
