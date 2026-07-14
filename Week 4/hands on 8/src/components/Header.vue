@@ -3,12 +3,12 @@
     <h1>Student Portal</h1>
 
     <nav>
-      <RouterLink to="/">Home</RouterLink>
-
+      <RouterLink to="/">
+        Home
+      </RouterLink>
       <RouterLink to="/courses">
         Courses
       </RouterLink>
-
       <RouterLink to="/profile">
         Profile
       </RouterLink>
