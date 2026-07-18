@@ -2,47 +2,74 @@ import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 
-@pytest.mark.parametrize(
-    "message",
-    [
-        "Hello",
-        "Selenium Automation",
-        "12345"
-    ]
-)
-def test_simple_form_submission(driver, message):
+
+# @pytest.mark.parametrize(
+#     "message",
+#     [
+#         "Hello",
+#         "Selenium Automation",
+#         "12345"
+#     ]
+# )
+# def test_simple_form_submission(driver, message, base_url):
+
+#     driver.get(
+#         base_url + "simple-form-demo"
+#     )
+
+#     message_input = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located(
+#             (By.ID, "user-message")
+#         )
+#     )
+
+#     message_input.clear()
+#     message_input.send_keys(message)
+
+#     submit_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable(
+#             (By.ID, "showInput")
+#         )
+#     )
+
+#     submit_button.click()
+
+#     WebDriverWait(driver, 10).until(
+#         lambda d: d.find_element(By.ID, "message").text == message
+#     )
+
+#     display = driver.find_element(By.ID, "message")
+
+#     assert display.text == message
+
+
+
+
+def test_dropdown_selection(driver, base_url):
 
     driver.get(
-        "https://www.lambdatest.com/selenium-playground/simple-form-demo"
+        base_url + "select-dropdown-demo"
     )
+    element = driver.find_element(By.ID, "select-demo")
 
-    message_input = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located(
-            (By.ID, "user-message")
+    dropdown = Select(
+        driver.find_element(
+            By.ID,
+            "select-demo"
         )
     )
 
-    message_input.clear()
-    message_input.send_keys(message)
-
-    submit_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable(
-            (By.ID, "showInput")
-        )
+    dropdown.select_by_visible_text(
+        "Wednesday"
     )
 
-    submit_button.click()
-
-    WebDriverWait(driver, 10).until(
-        lambda d: d.find_element(By.ID, "message").text == message
-    )
-
-    display = driver.find_element(By.ID, "message")
-
-    assert display.text == message
-
+    selected_option = dropdown.first_selected_option
+    print(element)
+    assert selected_option.text == "Wednesday"
 # def test_simple_form_submission(driver):
 
 #     driver.get(

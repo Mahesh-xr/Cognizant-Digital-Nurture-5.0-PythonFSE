@@ -20,6 +20,11 @@ import pytest
 from selenium import webdriver
 
 
+@pytest.fixture(scope="session")
+def base_url():
+
+    return "https://www.lambdatest.com/selenium-playground/"
+
 @pytest.fixture(scope="function")
 def driver(request):
 
@@ -49,4 +54,3 @@ def pytest_runtest_makereport(item, call):
             driver.save_screenshot(
                 f"{test_name}_failure.png"
             )
-            
