@@ -68,7 +68,7 @@ def test_dropdown_selection(driver, base_url):
     )
 
     selected_option = dropdown.first_selected_option
-    print(element)
+    
     assert selected_option.text == "Wednesday"
 # def test_simple_form_submission(driver):
 
